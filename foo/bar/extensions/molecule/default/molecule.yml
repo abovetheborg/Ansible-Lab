@@ -1,12 +1,13 @@
 ---
 dependency:
-  name: galaxy
-  options:
-    requirements-file: requirements.yml
+   name: galaxy
 driver:
-  name: docker
+   name: ec2
 platforms:
-  - name: ubuntu
-    privileged: true
-    image: ubuntu:latest
-    pre_build_image: false
+  - name: instance
+    image_owner: "099720109477"
+    image_name: molecule_provisioned
+    instance_type: t2.micro
+    vpc_subnet_id: vpc-0c96dd0104b1d88ce
+    tags:
+      nmae: molecule_instance
