@@ -87,7 +87,6 @@
       ansible.builtin.raw: uname -a
       register: result
       changed_when: false
-      become: true
 
     - name: Display uname info
       ansible.builtin.debug:
