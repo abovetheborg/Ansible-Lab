@@ -1,0 +1,10 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+platforms:
+  - name: ubuntu
+    privileged: true
+    image: ubuntu:latest
+    pre_build_image: false
