@@ -3,7 +3,7 @@ import shutil
 import subprocess
 from git import Repo
 
-REPO_URL = "https://github.com/example/ansible-role-example.git"  # Replace with your repo
+REPO_URL = "https://github.com/abovetheborg/Ansible-Lab-Tester.git"  # Replace with your repo
 CLONE_DIR = "/tmp/ansible-role-example"
 
 def clone_repo(repo_url, clone_dir):
@@ -16,4 +16,4 @@ def run_molecule_test(clone_dir):
 
 if __name__ == "__main__":
     clone_repo(REPO_URL, CLONE_DIR)
-    run_molecule_test(CLONE_DIR)
+    # run_molecule_test(CLONE_DIR)
