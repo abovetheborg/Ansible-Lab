@@ -1,5 +1,8 @@
 # molecule_poc
 My hello world for setting up Molecule
 
-This will create a boiler plate ansible molecule framework
+# Tutorial
+Making sure I can follow the tutorial here:
+https://ansible.readthedocs.io/projects/molecule/getting-started/#inspecting-the-moleculeyml
+
 
