@@ -1,2 +1,2 @@
-molecule==4.0.4
+molecule==25.5.0 
 # https://pip.pypa.io/en/stable/topics/vcs-support/
