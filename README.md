@@ -30,4 +30,5 @@ You can resolve this by either:
   sudo usermod -aG docker $USER
   ```
 
-  I need to chang molecule so that it uses docker.
+  You were driven crazy by this bug: https://github.com/ansible/molecule/issues/4117
+  which seems to link the molecule folder being in the .gitignore file.

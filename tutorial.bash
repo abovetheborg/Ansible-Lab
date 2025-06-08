@@ -30,3 +30,9 @@ mkdir -p extensions
 cd extensions
 molecule init scenario
 
+cat << EOF > molecule/default/converge.yml
+---
+- name: Include a playbook from a collection
+  ansible.builtin.import_playbook: foo.bar.my_playbook
+EOF
+
