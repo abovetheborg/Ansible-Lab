@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 ansible-galaxy collection init foo.bar
 cd foo/bar/roles
