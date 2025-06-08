@@ -29,3 +29,5 @@ You can resolve this by either:
   ```
   sudo usermod -aG docker $USER
   ```
+
+  I need to chang molecule so that it uses docker.
