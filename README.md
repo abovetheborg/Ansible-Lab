@@ -32,3 +32,5 @@ You can resolve this by either:
 
   You were driven crazy by this bug: https://github.com/ansible/molecule/issues/4117
   which seems to link the molecule folder being in the .gitignore file.
+
+  https://github.com/ansible/molecule/issues/4040
