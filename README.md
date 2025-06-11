@@ -37,3 +37,6 @@ You can resolve this by either:
 
   https://developers.redhat.com/articles/2023/09/13/introducing-ansible-molecule-ansible-automation-platform#getting_started_with_molecule_developer_preview
   
+  https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo?newreg=4cad8b9ea40c4e8eae32595691e192db
+
+I struggle with getting docker to work as the driver for molecule.
