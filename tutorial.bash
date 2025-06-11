@@ -4,6 +4,9 @@
 mkdir -p collections/ansible_collections
 cd collections/ansible_collections
 
+export ANSIBLE_COLLECTIONS_PATH=~/git/Ansible-Lab/collections
+echo $ANSIBLE_COLLECTIONS_PATH
+
 ansible-galaxy collection init foo.bar
 cd foo/bar/roles
 ansible-galaxy role init my_role
@@ -36,12 +39,14 @@ molecule init scenario
 
 cat << EOF > molecule/default/converge.yml
 ---
-- name: Include a role from a collection
-  hosts: localhost
-  gather_facts: false
-  tasks:
-    - name: Testing role
-      ansible.builtin.debug:
-        msg: "This is a task from my_role." 
+- name: Include a playbook from a collection
+  ansible.builtin.import_playbook: foo.bar.my_playbook
 EOF
 
+cat << EOF >> molecule/default/molecule.yml
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      collections_path: ${ANSIBLE_COLLECTIONS_PATH}
+EOF

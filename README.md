@@ -34,3 +34,6 @@ You can resolve this by either:
   which seems to link the molecule folder being in the .gitignore file.
 
   https://github.com/ansible/molecule/issues/4040
+
+  https://developers.redhat.com/articles/2023/09/13/introducing-ansible-molecule-ansible-automation-platform#getting_started_with_molecule_developer_preview
+  
