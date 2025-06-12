@@ -1,11 +1,16 @@
 #!/bin/bash
 
+cd ~/git/Ansible-Lab
+rm -rf collections
+
 # molecule doesn't play well with being in the gitignore list
 rm .gitignore # do not commit this change :)
 
 # with a virtual environment activated
 pip install -r requirements.txt
 sudo snap install docker
+
+
 
 
 # https://github.com/ansible/molecule/issues/4040
