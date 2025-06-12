@@ -8,9 +8,13 @@ rm .gitignore # do not commit this change :)
 
 # with a virtual environment activated
 pip install -r requirements.txt
+
+# Docker is required for molecule
 sudo snap install docker
-
-
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+#sudo newgrp docker
+docker run hello-world
 
 
 # https://github.com/ansible/molecule/issues/4040
