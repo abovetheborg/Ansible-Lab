@@ -56,7 +56,13 @@ cat << EOF > molecule/default/converge.yml
   ansible.builtin.import_playbook: foo.bar.my_playbook
 EOF
 
-cat << EOF >> molecule/default/molecule.yml
+cat << 'EOF' > molecule/default/molecule.yml
+---
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: docker.io/library/ubuntu:latest
 provisioner:
   name: ansible
   config_options:
