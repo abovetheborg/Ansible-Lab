@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# molecule doesn't play well with being in the gitignore list
+rm .gitignore # do not commit this change :)
+
+# with a virtual environment activated
+pip install -r requirements.txt
+sudo snap install docker
+
+
 # https://github.com/ansible/molecule/issues/4040
 mkdir -p collections/ansible_collections
 cd collections/ansible_collections
@@ -10,7 +18,7 @@ echo $ANSIBLE_COLLECTIONS_PATH
 ansible-galaxy collection init foo.bar
 cd foo/bar/roles
 ansible-galaxy role init my_role
-#printf -- '--- \n- name: Task is running from within the role\n  ansible.builtin.debug:\n    msg: "This is a task from my_role."' > my_role/tasks/main.yml
+
 cat << EOF > my_role/tasks/main.yml
 ---
 - name: Task is running from within the role
@@ -20,7 +28,7 @@ EOF
 
 cd ..
 mkdir -p playbooks
-#printf -- '---\n- name: Test new role from within this playbook\n  hosts: localhost\n  gather_facts: false\n  tasks:\n    - name: Testing role\n      ansible.builtin.include_role:\n        name: foo.bar.my_role\n        tasks_from: main.yml' > playbooks/my_playbook.yml
+
 cat << EOF > playbooks/my_playbook.yml
 ---
 - name: Test new role from within this playbook
