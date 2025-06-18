@@ -11,10 +11,10 @@ pip install -r requirements.txt
 
 # Docker is required for molecule
 #sudo snap install docker
-sudo apt-get -y install docker.io
-sudo groupadd docker
-sudo gpasswd -a $USER docker
-#sudo newgrp docker
+# sudo apt-get -y install docker.io
+# sudo groupadd docker
+# sudo gpasswd -a $USER docker
+# #sudo newgrp docker
 docker run hello-world
 
 
