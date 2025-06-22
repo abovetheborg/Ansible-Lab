@@ -2,4 +2,4 @@
 My hello world for setting up Molecule
 
 # Tutorial
-See the [Tutorials read me file](./tutorials/README.md.md) for simple use case with Docker and AWS (WIP)
+See the [Tutorials read me file](./tutorials/README.md) for simple use case with Docker and AWS (WIP)
