@@ -2,41 +2,4 @@
 My hello world for setting up Molecule
 
 # Tutorial
-Making sure I can follow the tutorial here:
-https://ansible.readthedocs.io/projects/molecule/getting-started/#inspecting-the-moleculeyml
-
-
-Jeff Geerling: https://www.youtube.com/watch?v=FaXVZ60o8L8&t=2105s
-
-```
-molecule init scenario
-```
-This comment initialize the a molecule scenario called default
-foo/bar/extensions/molecule/default
-
-Docker must be installed
-
-## Troubleshooting
-
-If you encounter a permission error when running `destroy.yml` or Molecule commands with Docker, it is likely because your user does not have permission to access the Docker daemon.  
-You can resolve this by either:
-
-- Running the command with `sudo`, e.g.:
-  ```
-  sudo molecule destroy
-  ```
-- Or, adding your user to the `docker` group (then log out and back in):
-  ```
-  sudo usermod -aG docker $USER
-  ```
-
-  You were driven crazy by this bug: https://github.com/ansible/molecule/issues/4117
-  which seems to link the molecule folder being in the .gitignore file.
-
-  https://github.com/ansible/molecule/issues/4040
-
-  https://developers.redhat.com/articles/2023/09/13/introducing-ansible-molecule-ansible-automation-platform#getting_started_with_molecule_developer_preview
-  
-  https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo?newreg=4cad8b9ea40c4e8eae32595691e192db
-
-I struggle with getting docker to work as the driver for molecule.
+See the [Tutorials read me file](./tutorials/README.md.md) for simple use case with Docker and AWS (WIP)
