@@ -1,2 +1,3 @@
-collections/** 
+# collections/** 
 foo/** 
+tutorials/**/collections/**
