@@ -1,3 +1,91 @@
+#!/bin/bash
+
+export ANSIBLE_COLLECTIONS_PATH=~/git/Ansible-Lab/tutorials/docker/collections
+echo $ANSIBLE_COLLECTIONS_PATH
+
+export GIT_PROJET_ROOT=~/git/Ansible-Lab
+echo $GIT_PROJET_ROOT
+
+# cd ~/git/Ansible-Lab
+rm -rf collections
+
+# molecule doesn't play well with being in the gitignore list
+rm $GIT_PROJET_ROOT/.gitignore # do not commit this change :)
+
+# with a virtual environment activated
+pip install -r requirements.txt
+
+# Docker is required for molecule
+#sudo snap install docker
+# sudo apt-get -y install docker.io
+# sudo groupadd docker
+# sudo gpasswd -a $USER docker
+# #sudo newgrp docker
+docker run hello-world
+
+
+# https://github.com/ansible/molecule/issues/4040
+mkdir -p collections/ansible_collections
+cd collections/ansible_collections
+
+
+
+ansible-galaxy collection init foo.bar
+cd foo/bar/roles
+ansible-galaxy role init my_role
+
+cat << EOF > my_role/tasks/main.yml
+---
+- name: Task is running from within the role
+  ansible.builtin.debug:
+    msg: "This is a task from my_role."
+EOF
+
+cd ..
+mkdir -p playbooks
+
+cat << EOF > playbooks/my_playbook.yml
+---
+- name: Test new role from within this playbook
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Testing role
+      ansible.builtin.include_role:
+        name: foo.bar.my_role
+        tasks_from: main.yml
+EOF
+
+mkdir -p extensions
+cd extensions
+molecule init scenario
+
+cat << EOF > molecule/default/converge.yml
+---
+- name: Include a playbook from a collection
+  ansible.builtin.import_playbook: foo.bar.my_playbook
+EOF
+
+cat << 'EOF' > molecule/default/molecule.yml
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+driver:
+  name: docker
+platforms:
+  - name: instance
+    image: docker.io/library/ubuntu:latest
+    pre_build_image: true
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      collections_path: ${ANSIBLE_COLLECTIONS_PATH}
+EOF
+
+cat << 'EOF' > molecule/default/create.yml
 - name: Create
   hosts: localhost
   gather_facts: false
@@ -7,13 +95,6 @@
         hosts: {}
         molecule: {}
   tasks:
-    - name: Pull Docker Image
-      community.docker.docker_image:
-        name: "{{ item.name }}"
-        source: pull
-      loop: "{{ molecule_yml.platforms }}"
-      become: true
-
     - name: Create a container
       community.docker.docker_container:
         name: "{{ item.name }}"
@@ -23,7 +104,6 @@
         log_driver: json-file
       register: result
       loop: "{{ molecule_yml.platforms }}"
-      become: true
 
     - name: Print some info
       ansible.builtin.debug:
@@ -38,8 +118,6 @@
       loop: "{{ result.results }}"
       loop_control:
         label: "{{ item.container.Name }}"
-    
-
 
     - name: Add container to molecule_inventory
       vars:
@@ -56,10 +134,6 @@
       loop: "{{ molecule_yml.platforms }}"
       loop_control:
         label: "{{ item.name }}"
-      
-    - name: Debug inventory string
-      ansible.builtin.debug:
-        var: molecule_inventory
 
     - name: Dump molecule_inventory
       ansible.builtin.copy:
@@ -91,3 +165,4 @@
     - name: Display uname info
       ansible.builtin.debug:
         msg: "{{ result.stdout }}"
+EOF
